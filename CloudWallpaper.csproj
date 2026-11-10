@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x64</PlatformTarget>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <AssemblyName>CloudWallpaper</AssemblyName>
+    <RootNamespace>CloudWallpaper</RootNamespace>
+    <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
+
+    <!-- 版本号：发布新版本时用 tools\publish.ps1 -Version x.y.z 指定，自动更新靠它判断新旧 -->
+    <Version>1.0.0</Version>
+    <!-- 自动更新清单 latest.json 的网址：写在项目根目录的 update-url.txt 里（一行），留空则不检查更新 -->
+    <UpdateUrl Condition="'$(UpdateUrl)' == '' And Exists('$(MSBuildProjectDirectory)\update-url.txt')">$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\update-url.txt').Trim())</UpdateUrl>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="UpdateUrl" Value="$(UpdateUrl)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NBitcoin.Secp256k1" Version="4.0.4" />
+  </ItemGroup>
+
+</Project>
